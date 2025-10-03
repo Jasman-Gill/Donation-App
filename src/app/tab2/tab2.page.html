@@ -1,17 +1,60 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>List an Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Item Title</ion-label>
+      <ion-input
+        formControlName="title"
+        placeholder="e.g., Vintage Bicycle">
+      </ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="itemForm.get('title')?.touched && itemForm.get('title')?.invalid">
+      Title is required (min 3 characters)
+    </ion-note>
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea
+        formControlName="description"
+        placeholder="Describe the item...">
+      </ion-textarea>
+    </ion-item>
+    <ion-note color="danger" *ngIf="itemForm.get('description')?.touched && itemForm.get('description')?.invalid">
+      Description is required (min 10 characters)
+    </ion-note>
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Category</ion-label>
+      <ion-select formControlName="category">
+        <ion-select-option value="Clothes">Clothes</ion-select-option>
+        <ion-select-option value="Books">Books</ion-select-option>
+        <ion-select-option value="Electronics">Electronics</ion-select-option>
+        <ion-select-option value="Furniture">Furniture</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-card color="success" class="ion-margin-top ion-padding" style="background-color: #f0fff4;">
+      <ion-text color="dark">
+        📍 Your location will be used to help nearby users find this item
+      </ion-text>
+    </ion-card>
+
+    <ion-button
+      expand="block"
+      color="primary"
+      type="submit"
+      class="ion-margin-top">
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      List Item
+    </ion-button>
+
+  </form>
 </ion-content>

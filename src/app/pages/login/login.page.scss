@@ -1,0 +1,20 @@
+.custom-input {
+    margin-bottom: 20px;
+}
+
+.custom-button {
+    --background: #3880ff;
+    --border-radius: 8px;
+    font-weight: bold;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+
+    a {
+        color: #3880ff;
+        font-weight: 500;
+        text-decoration: none;
+    }
+}

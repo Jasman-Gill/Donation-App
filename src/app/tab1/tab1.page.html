@@ -1,17 +1,30 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Nearby Items</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-refresher slot="fixed" (ionRefresh)="ngOnInit(); $event.target.complete()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="items.length > 0">
+    <ion-item *ngFor="let item of items" button [routerLink]="['/item-detail', item.id]">
+      <ion-thumbnail slot="start">
+        <img [src]="item.imageUrl || 'assets/placeholder.png'">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <p><ion-icon name="location-outline"></ion-icon> {{ item.distance }} km away</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-text *ngIf="items.length === 0">
+    <p>No items found nearby.</p>
+  </ion-text>
+
 </ion-content>
